@@ -1,0 +1,133 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "jest": true
+    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "react",
+        "eslint-plugin-react",
+        "@typescript-eslint",
+        "react-hooks",
+        "prettier"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+    ],
+    "settings": {
+        "react": {
+            "createClass": "createReactClass",
+            "pragma": "React",
+            "version": "detect",
+            "flowVersion": "0.53"
+        }
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module",
+        "ecmaVersion": 2018
+    },
+    "ignorePatterns": ["**/*.md", "**/*.*ss", "img/", "style/"],
+    "rules": {
+        "unicode-bom": "error",
+        "vars-on-top": "warn",
+        "promise/no-nesting": "off",
+        "prefer-const": "error",
+        "valid-jsdoc": "warn",
+        "use-isnan": "warn",
+        "no-sparse-arrays": "error",
+        "no-template-curly-in-string": "error",
+        "no-unreachable": "warn",
+        "no-console": "warn",
+        "react/no-unescaped-entities": [
+            "error",
+            {
+                "forbid": [
+                    ">",
+                    "}"
+                ]
+            }
+        ],
+        "react/prop-types": [
+            "warn"
+        ],
+        "react/no-typos": [
+            "warn"
+        ],
+        "react/no-unsafe": [
+            "warn"
+        ],
+        "react/jsx-no-bind": [
+            "error",
+            {
+                "ignoreDOMComponents": true
+            }
+        ],
+        "react/no-unused-state": [
+            "warn"
+        ],
+        "react/no-unused-prop-types": "off",
+        "react/jsx-key": [
+            "warn"
+        ],
+        "react/no-children-prop": [
+            "warn"
+        ],
+        "react/jsx-no-target-blank": [
+            "warn"
+        ],
+        "react/jsx-props-no-multi-spaces": [
+            "warn"
+        ],
+        "react/jsx-closing-bracket-location": [
+            "warn"
+        ],
+        "react/self-closing-comp": [
+            "warn"
+        ],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+/*        "@typescript-eslint/naming-convention": [
+            "warn"
+        ],*/
+        "@typescript-eslint/no-empty-function": [
+            "warn"
+        ],
+        "prettier/prettier": "warn"
+    },
+    "overrides": [
+        {
+            // enable the rule specifically for TypeScript files
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "off",
+                "react/prop-types": "off"
+            }
+        },
+        {
+            "files": [
+                "*hook*.ts"
+            ],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": [
+                    "warn"
+                ]
+            }
+        }
+    ]
+}
