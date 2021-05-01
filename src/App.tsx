@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer, useState } from "react";
+import "./App.css";
+import { Product, Route } from "./typing/common";
+
+import { Tabs } from "./components/UI/Tabs";
+
+import { Homepage } from "./components/App/Homepage";
+import { Cart } from "./components/App/Cart";
+import { ProductsContainer } from "./components/Products/Products";
+import { defaultStore, reducer } from "./utils/appReducer";
 
 function App() {
-  let s  = "100"; 
+  const [route, setRoute] = useState<Route>("home");
+
+  const [store, dispatch] = useReducer(reducer, defaultStore);
+
+  const { productsList } = store;
+
+  function handleSubmit(products: Product[]) {
+    dispatch({
+      type: "ADD_TO_CART",
+      value: products,
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Tabs activeTab={route} onTabSelect={setRoute} />
+      <div data-testid="page-container">
+        {route === "home" && <Homepage />}
+        {route === "products_list" && (
+          <ProductsContainer products={productsList} onSubmit={handleSubmit} />
+        )}
+        {route === "cart" && <Cart />}
+      </div>
     </div>
   );
 }
