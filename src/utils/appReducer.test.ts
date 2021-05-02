@@ -5,7 +5,7 @@ describe("reducer", () => {
   const defaultStore: Store = {
     productsList: [],
     cart: [],
-    paidProducts: [],
+    orders: [],
   };
 
   const mockedProductOne: Product = {
@@ -18,7 +18,7 @@ describe("reducer", () => {
     quantity: 3,
   };
 
-  it("should correctly add products to cart", () => {
+  it("should add products to cart", () => {
     const store = reducer(defaultStore, {
       type: "ADD_TO_CART",
       value: [mockedProductOne, mockedProductTwo],
@@ -27,11 +27,11 @@ describe("reducer", () => {
     expect(store).toEqual({
       productsList: [],
       cart: [mockedProductOne, mockedProductTwo],
-      paidProducts: [],
+      orders: [],
     });
   });
 
-  it("shoudl correcty update quantity of a cart item", () => {
+  it("should update quantity of a cart item", () => {
     const store = reducer(defaultStore, {
       type: "UPDATE_PRODUCT",
       productKey: "someproductKey3",
@@ -47,7 +47,38 @@ describe("reducer", () => {
         },
         mockedProductTwo,
       ],
-      paidProducts: [],
+      orders: [],
+    });
+  });
+
+  it("should reset the cart", () => {
+    const store = reducer(defaultStore, {
+      type: "RESET_CART",
+    });
+
+    expect(store).toEqual({
+      productsList: [],
+      cart: [],
+      orders: [],
+    });
+  });
+
+  it("should create a new order", () => {
+    const store = reducer(
+      {
+        productsList: [],
+        cart: [mockedProductOne, mockedProductTwo],
+        orders: [],
+      },
+      {
+        type: "CREATE_ORDER",
+      }
+    );
+
+    expect(store).toEqual({
+      productsList: [],
+      cart: [mockedProductOne, mockedProductTwo],
+      orders: [[mockedProductOne, mockedProductTwo]],
     });
   });
 });

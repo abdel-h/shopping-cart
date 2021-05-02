@@ -1,4 +1,4 @@
-import { Product, Store } from "./../typing/common";
+import { Product, Store, StoreAction } from "./../typing/common";
 import { addProductToCart, updateProductInCart } from "./addProductToCart";
 
 const productsList: Product[] = [
@@ -19,31 +19,13 @@ const productsList: Product[] = [
   },
 ];
 
-type AddToCartAction = {
-  type: "ADD_TO_CART";
-  value: Product[];
-};
-
-type PayCartAction = {
-  type: "PAY_CART";
-  value: Product[];
-};
-
-type UpdateProductAction = {
-  type: "UPDATE_PRODUCT";
-  productKey: string;
-  quanity: number;
-};
-
-type Action = AddToCartAction | PayCartAction | UpdateProductAction;
-
 export const defaultStore = {
   productsList,
   cart: [],
   paidProducts: [],
 };
 
-export const reducer = (store: Store, action: Action): Store => {
+export const reducer = (store: Store, action: StoreAction): Store => {
   switch (action.type) {
     case "ADD_TO_CART": {
       return {
@@ -60,6 +42,20 @@ export const reducer = (store: Store, action: Action): Store => {
           action.productKey,
           action.quanity
         ),
+      };
+    }
+
+    case "RESET_CART": {
+      return {
+        ...store,
+        cart: [],
+      };
+    }
+
+    case "CREATE_ORDER": {
+      return {
+        ...store,
+        orders: [...store.orders, store.cart],
       };
     }
 
