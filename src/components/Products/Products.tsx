@@ -9,24 +9,23 @@ type Props = {
 };
 
 export function ProductsContainer({ products, onSubmit }: Props) {
+  const formInitialState = products.reduce<{
+    [productKey: string]: number;
+  }>((acc, { productKey }) => {
+    acc[productKey] = 0;
+    return acc;
+  }, {});
+
   const [formState, setFormState] = useState<{
     [productKey: string]: number;
-  }>({});
+  }>(formInitialState);
 
   const isFormEmpty = Object.values(formState).every(
     (quantity) => quantity === 0
   );
 
   function handleReset() {
-    if (formState) {
-      const formStateToArray = Object.entries(formState ?? {}).map(
-        ([productKey]) => ({
-          productKey,
-          quantity: 0,
-        })
-      );
-      onSubmit(formStateToArray);
-    }
+    setFormState(formInitialState);
   }
 
   function handleAddToCart() {
@@ -58,11 +57,14 @@ export function ProductsContainer({ products, onSubmit }: Props) {
         Add to cart
       </Button>
 
-      {products.map((product) => (
+      {products.map(({ productKey }) => (
         <SingleProduct
-          key={product.productKey}
-          product={product}
-          onChange={handleProductQuantityChange(product.productKey)}
+          key={productKey}
+          product={{
+            productKey: productKey,
+            quantity: formState[productKey],
+          }}
+          onChange={handleProductQuantityChange(productKey)}
         />
       ))}
     </div>

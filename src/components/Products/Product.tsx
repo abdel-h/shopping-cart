@@ -1,9 +1,11 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import { Product } from "../../typing/common";
 
 type Props = {
-  product: Product;
+  product: {
+    productKey: string;
+    quantity: number;
+  };
 
   onChange: (value: number) => void;
 };

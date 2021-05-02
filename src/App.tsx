@@ -5,7 +5,7 @@ import { Product, Route } from "./typing/common";
 import { Tabs } from "./components/UI/Tabs";
 
 import { Homepage } from "./components/App/Homepage";
-import { Cart } from "./components/App/Cart";
+import { CartPanel } from "./components/App/CartPanel";
 import { ProductsContainer } from "./components/Products/Products";
 import { defaultStore, reducer } from "./utils/appReducer";
 
@@ -14,7 +14,7 @@ function App() {
 
   const [store, dispatch] = useReducer(reducer, defaultStore);
 
-  const { productsList } = store;
+  const { productsList, cart } = store;
 
   function handleSubmit(products: Product[]) {
     dispatch({
@@ -31,7 +31,7 @@ function App() {
         {route === "products_list" && (
           <ProductsContainer products={productsList} onSubmit={handleSubmit} />
         )}
-        {route === "cart" && <Cart />}
+        {route === "cart" && <CartPanel cart={cart} dispatch={dispatch} />}
       </div>
     </div>
   );

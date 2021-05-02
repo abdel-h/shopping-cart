@@ -82,15 +82,6 @@ describe("ProductsContainer", () => {
     expect(resetButton.hasAttribute("disabled")).toBeTruthy();
   });
 
-  it("should clear the form when reset button is clicked", () => {
-    const { getPageButtons } = renderProductsContainer(filledProductsArrayMock);
-    const resetButton = getPageButtons().resetButton;
-
-    fireEvent(resetButton, createEvent.click(resetButton));
-
-    expect(handleSubmitMock).toHaveBeenCalledWith(emptyProductsArrayMock);
-  });
-
   it("should correctly add to cart the quantity of each product", async () => {
     const { findPageInputs, getPageButtons } = renderProductsContainer(
       emptyProductsArrayMock
