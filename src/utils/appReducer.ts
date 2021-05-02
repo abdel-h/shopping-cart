@@ -3,26 +3,26 @@ import { addProductToCart, updateProductInCart } from "./addProductToCart";
 
 const productsList: Product[] = [
   {
-    productKey: "produit_1",
-    name: "Produit 1",
+    productKey: "product_1",
+    name: "Product 1",
     quantity: 20,
   },
   {
-    productKey: "produit_2",
-    name: "Produit 2",
+    productKey: "product_2",
+    name: "Product 2",
     quantity: 20,
   },
   {
-    productKey: "produit_3",
-    name: "Produit 3",
+    productKey: "product_3",
+    name: "Product 3",
     quantity: 20,
   },
 ];
 
-export const defaultStore = {
+export const defaultStore: Store = {
   productsList,
   cart: [],
-  paidProducts: [],
+  orders: [],
 };
 
 export const reducer = (store: Store, action: StoreAction): Store => {

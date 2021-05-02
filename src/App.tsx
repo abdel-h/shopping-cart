@@ -24,7 +24,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="container">
       <Tabs activeTab={route} onTabSelect={setRoute} />
       <div data-testid="page-container">
         {route === "home" && <Homepage />}

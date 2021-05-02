@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, CardColumns } from "react-bootstrap";
 import { Product } from "../../typing/common";
 import { SingleProduct } from "./Product";
 
@@ -50,23 +50,27 @@ export function ProductsContainer({ products, onSubmit }: Props) {
 
   return (
     <div>
-      <Button disabled={isFormEmpty} onClick={handleReset}>
-        Reset
-      </Button>
-      <Button disabled={isFormEmpty} onClick={handleAddToCart}>
-        Add to cart
-      </Button>
+      <div className="d-flex justify-content-end mb-3">
+        <Button disabled={isFormEmpty} onClick={handleReset} className="mr-3">
+          Reset
+        </Button>
+        <Button disabled={isFormEmpty} onClick={handleAddToCart}>
+          Add to cart
+        </Button>
+      </div>
 
-      {products.map(({ productKey }) => (
-        <SingleProduct
-          key={productKey}
-          product={{
-            productKey: productKey,
-            quantity: formState[productKey],
-          }}
-          onChange={handleProductQuantityChange(productKey)}
-        />
-      ))}
+      <CardColumns>
+        {products.map(({ productKey }) => (
+          <SingleProduct
+            key={productKey}
+            product={{
+              productKey: productKey,
+              quantity: formState[productKey],
+            }}
+            onChange={handleProductQuantityChange(productKey)}
+          />
+        ))}
+      </CardColumns>
     </div>
   );
 }

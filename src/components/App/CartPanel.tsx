@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, CardColumns } from "react-bootstrap";
 import { Product, StoreAction } from "../../typing/common";
 import { SingleProduct } from "../Products/Product";
 
@@ -25,19 +25,23 @@ export function CartPanel({ cart, dispatch }: Props) {
   return (
     <>
       <div>Cart Page content</div>
-      {cart.map(({ productKey, quantity }) => (
-        <SingleProduct
-          key={productKey}
-          product={{
-            productKey,
-            quantity,
-          }}
-          onChange={handleQuantityChange(productKey)}
-        />
-      ))}
-      <Button disabled={isCartEmpty} onClick={handlePayOrder}>
-        Pay
-      </Button>
+      <CardColumns className="mb-3">
+        {cart.map(({ productKey, quantity }) => (
+          <SingleProduct
+            key={productKey}
+            product={{
+              productKey,
+              quantity,
+            }}
+            onChange={handleQuantityChange(productKey)}
+          />
+        ))}
+      </CardColumns>
+      <div className="d-flex justify-content-end">
+        <Button disabled={isCartEmpty} onClick={handlePayOrder}>
+          Pay
+        </Button>
+      </div>
     </>
   );
 }
