@@ -2,7 +2,6 @@ import React, { useReducer, useState } from "react";
 import "./App.css";
 import { Product, Route } from "./typing/common";
 
-import { Tabs } from "./components/UI/Tabs";
 import { AppHeader } from "./components/UI/Header";
 
 import { Homepage } from "./components/App/Homepage";
@@ -38,7 +37,6 @@ function App() {
         <div data-testid="tabs-navs">
           <AppHeader activeRoute={route} onRouteChange={setRoute} />
         </div>
-        {/* <Tabs activeTab={route} onTabSelect={setRoute} /> */}
         <div data-testid="page-container">
           {route === "home" && <Homepage />}
           {route === "products_list" && (
