@@ -9,6 +9,11 @@ import {
 
 import App from "./App";
 
+const tabsIds = {
+  home: "Home",
+  products: "Fruitz",
+  cart: "Cart",
+};
 describe("App", () => {
   const renderApp = () => {
     const utils = render(<App />);
@@ -24,17 +29,17 @@ describe("App", () => {
     function getTabsNavs() {
       return {
         parent: utils.queryByTestId("tabs-navs"),
-        productsNav: utils.queryByText("Products"),
-        cartNav: utils.queryByText("Cart"),
-        homeNav: utils.queryByText("Home"),
+        productsNav: utils.queryByText(tabsIds.products),
+        cartNav: utils.queryByText(tabsIds.cart),
+        homeNav: utils.queryByText(tabsIds.home),
       };
     }
 
     function clickOnTab() {
       return {
-        productsNav: utils.getByText("Products"),
-        cartNav: utils.getByText("Cart"),
-        homeNav: utils.getByText("Home"),
+        productsNav: utils.getByText(tabsIds.products),
+        cartNav: utils.getByText(tabsIds.cart),
+        homeNav: utils.getByText(tabsIds.home),
       };
     }
 
