@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Product, Route } from "./typing/common";
 
@@ -7,14 +7,14 @@ import { AppHeader } from "./components/UI/Header";
 import { Homepage } from "./components/App/Homepage";
 import { CartPanel } from "./components/App/CartPanel";
 import { ProductsContainer } from "./components/Products/Products";
-import { defaultStore, reducer } from "./utils/appReducer";
+import { useStore } from "./utils/appReducer";
 
 function App() {
   const [route, setRoute] = useState<Route>("home");
 
-  const [store, dispatch] = useReducer(reducer, defaultStore);
+  const { dispatch, state } = useStore();
 
-  const { productsList, cart } = store;
+  const { productsList, cart } = state;
 
   function handleSubmit(products: Product[]) {
     dispatch({

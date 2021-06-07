@@ -1,5 +1,7 @@
-import { Product, Store, StoreAction } from "./../typing/common";
+import { Product, StoreState, StoreAction } from "./../typing/common";
 import { addProductToCart, updateProductInCart } from "./addProductToCart";
+
+import create from "zustand";
 
 const productsList: Product[] = [
   {
@@ -19,13 +21,29 @@ const productsList: Product[] = [
   },
 ];
 
-export const defaultStore: Store = {
+export const defaultStore: StoreState = {
   productsList,
   cart: [],
   orders: [],
 };
 
-export const reducer = (store: Store, action: StoreAction): Store => {
+type Store = {
+  state: StoreState;
+  dispatch: (action: StoreAction) => any;
+};
+
+export const useStore = create<Store>((set) => ({
+  state: defaultStore,
+  dispatch: (action: StoreAction) =>
+    set((store) => {
+      return {
+        ...store,
+        state: reducer(store.state, action),
+      };
+    }),
+}));
+
+export const reducer = (store: StoreState, action: StoreAction): StoreState => {
   switch (action.type) {
     case "ADD_TO_CART": {
       return {

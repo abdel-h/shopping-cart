@@ -8,7 +8,7 @@ export type Product = {
   photo?: string;
 };
 
-export type Store = {
+export type StoreState = {
   productsList: Product[];
   cart: Product[];
   orders: Product[][];

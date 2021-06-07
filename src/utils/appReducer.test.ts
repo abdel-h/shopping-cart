@@ -1,8 +1,8 @@
 import { reducer } from "./appReducer";
-import { Product, Store } from "./../typing/common";
+import { Product, StoreState } from "./../typing/common";
 
 describe("reducer", () => {
-  const defaultStore: Store = {
+  const defaultStore: StoreState = {
     productsList: [],
     cart: [],
     orders: [],
