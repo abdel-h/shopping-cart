@@ -37,9 +37,14 @@ export function ProductItem({ product, onAddToCart }: Props) {
 
   return (
     <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
-      <h1 className="text-gray-900 font-bold text-2xl">{name}</h1>
-      <div className="w-1/3 bg-cover bg-landscape" />
+      <div className="flex-none w-1/3 relative">
+        <img
+          src="https://images.unsplash.com/photo-1593280443077-ae46e0100ad1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1275&q=80"
+          className="absolute rounded-lg inset-0 w-full h-full object-cover"
+        />
+      </div>
       <div className="w-2/3 p-4">
+        <h1 className="text-gray-900 font-bold text-2xl">{name}</h1>
         <p className="mt-2 text-gray-600 text-sm">{description}</p>
         <div className="flex item-center justify-between mt-3">
           <h3 className="text-gray-700 font-bold text-xl">${price}</h3>

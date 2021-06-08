@@ -5,34 +5,9 @@ import userEvent from "@testing-library/user-event";
 
 import { ProductItem } from "./Item";
 import { Product } from "../../typing/common";
+import { generateProductFixture } from "../../utils/tests-utils";
 
-const productFixture: Product = {
-  productKey: "productKey",
-  quantity: 200,
-  name: "Product title",
-  description:
-    "You can't buy your future, but you can do it. Money is nothing, you'reverything.",
-  price: 200,
-};
-
-const emptyQuantityProductFixture = {
-  productKey: "productKey",
-  quantity: 0,
-  name: "Product title",
-  description:
-    "You can't buy your future, but you can do it. Money is nothing, you'reverything.",
-  price: 200,
-};
-
-const generateProductFixture = (type: "full" | "empty-quantity") => {
-  switch (type) {
-    case "empty-quantity":
-      return emptyQuantityProductFixture;
-    case "full":
-      return productFixture;
-  }
-};
-describe.only("Product Item", () => {
+describe("Product Item", () => {
   const handleAddToCart = jest.fn();
 
   const renderProduct = (product: Product) => {
@@ -78,15 +53,12 @@ describe.only("Product Item", () => {
   });
 
   it("adds to cart an item, when the add to cart button is clicked", () => {
-    const { getAddToCartButton } = renderProduct(
-      generateProductFixture("full")
-    );
+    const fixture = generateProductFixture("full");
+    const { getAddToCartButton } = renderProduct(fixture);
 
     userEvent.click(getAddToCartButton);
     expect(handleAddToCart).toBeCalled();
-    expect(handleAddToCart).toBeCalledWith(
-      generateProductFixture("full").productKey
-    );
+    expect(handleAddToCart).toBeCalledWith(fixture.productKey);
   });
 
   it("renders a disabled add to cart if the quantity is 0", () => {
