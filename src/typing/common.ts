@@ -9,15 +9,20 @@ export type Product = {
   photo?: string;
 };
 
+export type CartProduct = {
+  productKey: string;
+  quantity: number;
+};
+
 export type StoreState = {
   productsList: Product[];
-  cart: Product[];
+  cart: CartProduct[];
   orders: Product[][];
 };
 
 type AddToCartAction = {
   type: "ADD_TO_CART";
-  value: Product[];
+  value: CartProduct;
 };
 
 type PayCartAction = {
