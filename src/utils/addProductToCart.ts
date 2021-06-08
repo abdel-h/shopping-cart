@@ -1,40 +1,38 @@
-import { Product } from "./../typing/common";
+import { CartProduct } from "./../typing/common";
+import R from "ramda";
 
-export function addProductToCart(cart: Product[], products: Product[]) {
-  return products.reduce((acc, product) => {
-    const { productKey } = product;
+export function addProductToCart(cart: CartProduct[], product: CartProduct) {
+  const productInCartIndex = cart.findIndex(
+    (cartProduct) => cartProduct.productKey === product.productKey
+  );
 
-    const productInCartIndex = acc.findIndex(
-      (product) => product.productKey === productKey
-    );
+  if (productInCartIndex === -1) {
+    cart.push(product);
 
-    if (productInCartIndex !== -1) {
-      acc[productInCartIndex] = {
-        ...cart[productInCartIndex],
-        quantity: cart[productInCartIndex].quantity + product.quantity,
-      };
+    return cart;
+  }
 
-      return acc;
-    }
+  const { quantity, productKey } = product;
 
-    acc.push(product);
-
-    return acc;
-  }, cart);
+  return R.update(
+    productInCartIndex,
+    { productKey, quantity: quantity + 1 },
+    cart
+  );
 }
 
 export function updateProductInCart(
-  cart: Product[],
+  cart: CartProduct[],
   productKey: string,
   quantity: number
 ) {
-  const productIndex = cart.findIndex(
-    (product) => product.productKey === productKey
+  const productInCartIndex = cart.findIndex(
+    (cartProduct) => cartProduct.productKey === productKey
   );
 
-  if (productIndex !== -1) {
-    cart[productIndex].quantity = quantity;
+  if (productInCartIndex === -1) {
+    return cart;
   }
 
-  return [...cart];
+  return R.update(productInCartIndex, { productKey, quantity }, cart);
 }
