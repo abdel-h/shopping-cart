@@ -8,16 +8,25 @@ const productsList: Product[] = [
     productKey: "product_1",
     name: "Product 1",
     quantity: 20,
+    price: 50,
+    description:
+      "You can't buy your future, but you can do it. Money is nothing, you'r everything.",
   },
   {
     productKey: "product_2",
     name: "Product 2",
     quantity: 20,
+    price: 50,
+    description:
+      "You can't buy your future, but you can do it. Money is nothing, you'r everything.",
   },
   {
     productKey: "product_3",
     name: "Product 3",
     quantity: 20,
+    price: 50,
+    description:
+      "You can't buy your future, but you can do it. Money is nothing, you'r everything.",
   },
 ];
 

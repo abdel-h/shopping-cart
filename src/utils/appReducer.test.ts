@@ -1,3 +1,4 @@
+import { generateCartProductFixture } from "./tests-utils/index";
 import { reducer } from "./appReducer";
 import { Product, StoreState } from "./../typing/common";
 
@@ -8,25 +9,23 @@ describe("reducer", () => {
     orders: [],
   };
 
-  const mockedProductOne: Product = {
-    productKey: "someproductKey3",
-    quantity: 3,
-  };
-
-  const mockedProductTwo: Product = {
-    productKey: "someproductKey2",
-    quantity: 3,
-  };
-
   it("should add products to cart", () => {
-    const store = reducer(defaultStore, {
+    const productOne = generateCartProductFixture("productKey_1", 20);
+    const productTwo = generateCartProductFixture("productKey_2", 15);
+
+    let store = reducer(defaultStore, {
       type: "ADD_TO_CART",
-      value: [mockedProductOne, mockedProductTwo],
+      value: productOne,
+    });
+
+    store = reducer(store, {
+      type: "ADD_TO_CART",
+      value: productTwo,
     });
 
     expect(store).toEqual({
       productsList: [],
-      cart: [mockedProductOne, mockedProductTwo],
+      cart: [productOne, productTwo],
       orders: [],
     });
   });
