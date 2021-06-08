@@ -9,16 +9,17 @@ const defaultStoreCart = [
   generateCartProductFixture("productKey_3", 1),
 ];
 
+const handleClickMock = jest.fn();
 describe("CartButton", () => {
   it("renders a button with a default text", () => {
-    const { getByRole } = render(<CartButton />);
+    const { getByRole } = render(<CartButton onClick={handleClickMock} />);
     const button = getByRole("button", { name: /view cart/i });
 
     expect(button).not.toBeNull();
   });
 
   it("renders a button with number of items in the cart", () => {
-    const { getByRole } = render(<CartButton />);
+    const { getByRole } = render(<CartButton onClick={handleClickMock} />);
     const button = getByRole("button", { name: /view cart/i });
 
     expect(button).not.toBeNull();
@@ -27,7 +28,7 @@ describe("CartButton", () => {
   it("will not render the badge if there are no items in the cart", () => {
     jest.spyOn(store, "useStore").mockReturnValue({ state: { cart: [] } });
 
-    const { getByRole } = render(<CartButton />);
+    const { getByRole } = render(<CartButton onClick={handleClickMock} />);
 
     const button = getByRole("button", {
       name: /view cart/i,
@@ -42,7 +43,7 @@ describe("CartButton", () => {
       .spyOn(store, "useStore")
       .mockReturnValue({ state: { cart: defaultStoreCart } });
 
-    const { getByRole } = render(<CartButton />);
+    const { getByRole } = render(<CartButton onClick={handleClickMock} />);
 
     const button = getByRole("button", {
       name: /view cart/i,

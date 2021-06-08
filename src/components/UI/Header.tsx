@@ -16,6 +16,10 @@ export function AppHeader({ activeRoute, onRouteChange }: Props) {
     };
   }
 
+  function handleCartButtonClick() {
+    onRouteChange("cart");
+  }
+
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -35,7 +39,7 @@ export function AppHeader({ activeRoute, onRouteChange }: Props) {
           <AppLogo />
         </a>
         <div className="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-          <CartButton />
+          <CartButton onClick={handleCartButtonClick} />
         </div>
       </div>
     </header>

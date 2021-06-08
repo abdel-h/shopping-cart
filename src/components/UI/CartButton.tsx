@@ -1,12 +1,19 @@
 import React from "react";
 import { useStore } from "../../utils/appReducer";
 
-export function CartButton() {
+type Props = {
+  onClick: () => void;
+};
+
+export function CartButton({ onClick }: Props) {
   const { state } = useStore();
   const { cart } = state;
 
   return (
-    <button className="relative overflow-visible inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+    <button
+      onClick={onClick}
+      className="relative overflow-visible inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+    >
       {cart.length > 0 && (
         <div className="-mt-4 absolute bg-red-500 px-2 py-0.5 right-0 rounded-full text-white text-xs top-0 top-1.5">
           {cart.length}
