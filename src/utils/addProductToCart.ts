@@ -1,5 +1,5 @@
 import { CartProduct } from "./../typing/common";
-import R from "ramda";
+import * as R from "ramda";
 
 export function addProductToCart(cart: CartProduct[], product: CartProduct) {
   const productInCartIndex = cart.findIndex(

@@ -5,19 +5,22 @@ import create from "zustand";
 
 const productsList: Product[] = [
   {
-    productKey: "product_1",
+    productKey: "productkey_1",
     name: "Product 1",
     quantity: 20,
+    price: 2,
   },
   {
-    productKey: "product_2",
+    productKey: "productkey_2",
     name: "Product 2",
     quantity: 20,
+    price: 2,
   },
   {
-    productKey: "product_3",
+    productKey: "productkey_3",
     name: "Product 3",
     quantity: 20,
+    price: 2,
   },
 ];
 
