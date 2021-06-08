@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Product, Route } from "./typing/common";
+import { Route } from "./typing/common";
 
 import { AppHeader } from "./components/UI/Header";
 
@@ -14,14 +14,7 @@ function App() {
 
   const { dispatch, state } = useStore();
 
-  const { productsList, cart } = state;
-
-  function handleSubmit(products: Product[]) {
-    dispatch({
-      type: "ADD_TO_CART",
-      value: products,
-    });
-  }
+  const { cart } = state;
 
   return (
     <div
@@ -39,12 +32,7 @@ function App() {
         </div>
         <div data-testid="page-container">
           {route === "home" && <Homepage />}
-          {route === "products_list" && (
-            <ProductsContainer
-              products={productsList}
-              onSubmit={handleSubmit}
-            />
-          )}
+          {route === "products_list" && <ProductsContainer />}
           {route === "cart" && <CartPanel cart={cart} dispatch={dispatch} />}
         </div>
       </div>

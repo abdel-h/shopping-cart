@@ -1,76 +1,31 @@
-import React, { useState } from "react";
-import { Button, CardColumns } from "react-bootstrap";
-import { Product } from "../../typing/common";
-import { SingleProduct } from "./Product";
+import React from "react";
+import { useStore } from "../../utils/appReducer";
+import { ProductItem } from "./Item";
 
-type Props = {
-  products: Product[];
-  onSubmit: (products: Product[]) => void;
-};
+export function ProductsContainer() {
+  const { state, dispatch } = useStore();
 
-export function ProductsContainer({ products, onSubmit }: Props) {
-  const formInitialState = products.reduce<{
-    [productKey: string]: number;
-  }>((acc, { productKey }) => {
-    acc[productKey] = 0;
-    return acc;
-  }, {});
+  const { productsList } = state;
 
-  const [formState, setFormState] = useState<{
-    [productKey: string]: number;
-  }>(formInitialState);
-
-  const isFormEmpty = Object.values(formState).every(
-    (quantity) => quantity === 0
-  );
-
-  function handleReset() {
-    setFormState(formInitialState);
-  }
-
-  function handleAddToCart() {
-    const formStateToArray = Object.entries(formState ?? {}).map(
-      ([productKey, quantity]) => ({
-        productKey,
-        quantity,
-      })
+  function handleAddToCart(productKey: string) {
+    const product = productsList.find(
+      (product) => product.productKey === productKey
     );
 
-    onSubmit(formStateToArray);
-  }
-
-  function handleProductQuantityChange(productKey: string) {
-    return (value: number) => {
-      setFormState((state) => ({
-        ...state,
-        [productKey]: value,
-      }));
-    };
+    if (product) {
+      dispatch({ type: "ADD_TO_CART", value: product });
+    }
   }
 
   return (
-    <div>
-      <div className="d-flex justify-content-end mb-3">
-        <Button disabled={isFormEmpty} onClick={handleReset} className="mr-3">
-          Reset
-        </Button>
-        <Button disabled={isFormEmpty} onClick={handleAddToCart}>
-          Add to cart
-        </Button>
-      </div>
-
-      <CardColumns>
-        {products.map(({ productKey }) => (
-          <SingleProduct
-            key={productKey}
-            product={{
-              productKey: productKey,
-              quantity: formState[productKey],
-            }}
-            onChange={handleProductQuantityChange(productKey)}
-          />
-        ))}
-      </CardColumns>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
+      {productsList.map((product) => (
+        <ProductItem
+          key={product.productKey}
+          product={product}
+          onAddToCart={handleAddToCart}
+        />
+      ))}
     </div>
   );
 }
