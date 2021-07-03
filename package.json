@@ -6,7 +6,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "test-watch": "craco test --watch",
+    "test:watch": "craco test --watch",
+    "test:cypress": "cypress open",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -53,6 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "autoprefixer": "^9.8.6",
+    "cypress": "^7.6.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^12.3.1",
